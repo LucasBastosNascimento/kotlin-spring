@@ -1,15 +1,20 @@
 package com.mercadolivro.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import com.mercadolivro.controller.request.PostCustomerRequest
+import com.mercadolivro.model.CustomerModel
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("customers")
 class CustomerController {
 
     @GetMapping
-    fun helloWorld(): String{
-        return "Customer 1"
+    fun getCustomer(): CustomerModel {
+        return CustomerModel("1", "Lucas", "lucas@teste.com")
+    }
+
+    @PostMapping
+    fun create(@RequestBody customer: PostCustomerRequest){
+       println(customer)
     }
 }
