@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest
 class ControllerAdice {
 
     @ExceptionHandler(NotFoundException::class)
-    fun handlerExeption(ex: NotFoundException, response: WebRequest):ResponseEntity<ErroResponse> {
+    fun handlerNotFoudExeption(ex: NotFoundException, response: WebRequest):ResponseEntity<ErroResponse> {
       val erro = ErroResponse(
             HttpStatus.NOT_FOUND.value(),
             ex.message,
@@ -20,5 +20,17 @@ class ControllerAdice {
         )
 
        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(BadRequestException::class)
+    fun handlerBadRequestExeption(ex: BadRequestException, response: WebRequest):ResponseEntity<ErroResponse> {
+        val erro = ErroResponse(
+            HttpStatus.BAD_REQUEST.value(),
+            ex.message,
+            ex.erroCode,
+            null
+        )
+
+        return ResponseEntity(erro, HttpStatus.BAD_REQUEST)
     }
 }
