@@ -5,6 +5,7 @@ import com.mercadolivro.security.AuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -23,6 +24,9 @@ class SecurityConfig(
         "/customers"
     )
 
+    override fun configure(auth: AuthenticationManagerBuilder) {
+        auth.userDetailsService()
+    }
     override fun configure(http: HttpSecurity) {
         http.cors().and().csrf().disable()
         http.authorizeHttpRequests()
