@@ -2,7 +2,6 @@ package com.mercadolivro.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.context.support.RequestHandledEvent
 import springfox.documentation.builders.ApiInfoBuilder
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
@@ -21,8 +20,10 @@ class SwaggerConfig {
         .paths(PathSelectors.any())
         .build()
 
-        .apiInfo(ApiInfoBuilder()
-            .title("Mercado Livro")
-            .description("Apis do mercado livro")
-            .build())
+        .apiInfo(
+            ApiInfoBuilder()
+                .title("Mercado Livro")
+                .description("Api do Mercado Livro")
+                .build())
+
 }
