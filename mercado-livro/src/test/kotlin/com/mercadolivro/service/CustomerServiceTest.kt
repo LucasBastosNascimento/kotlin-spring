@@ -45,7 +45,6 @@ class CustomerServiceTest {
         verify(exactly = 0) { customerRepository.findByNameContaining(any())}
     }
 
-
     @Test
     fun `should return customers when name is informed`() {
         val name = UUID.randomUUID().toString()
@@ -58,6 +57,12 @@ class CustomerServiceTest {
         assertEquals(fakeCustomers, customers)
         verify(exactly = 0) { customerRepository.findAll()}
         verify(exactly = 1) { customerRepository.findByNameContaining(name)}
+    }
+
+    @Test
+    fun `should create customer and encrypt password`() {
+        var fakeCustomer = buildCustomer()
+        customerService.create(fakeCustomer)
     }
 
     fun buildCustomer(
