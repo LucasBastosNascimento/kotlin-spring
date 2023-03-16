@@ -2,7 +2,7 @@ package com.mercadolivro.security
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.mercadolivro.controller.request.LoginRequest
-import com.mercadolivro.execption.AuthenticationException
+import com.mercadolivro.exception.AuthenticationException
 import com.mercadolivro.repository.CustomerRepository
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
