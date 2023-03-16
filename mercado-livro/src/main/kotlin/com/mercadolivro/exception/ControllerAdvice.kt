@@ -1,6 +1,6 @@
 package com.mercadolivro.exception
 
-import com.mercadolivro.controller.response.ErroResponse
+import com.mercadolivro.controller.response.ErrorResponse
 import com.mercadolivro.controller.response.FieldErrorResponse
 import com.mercadolivro.enums.Errors
 import org.springframework.http.HttpStatus
@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
 
 @ControllerAdvice
-class ControllerAdice {
+class ControllerAdvice {
 
     @ExceptionHandler(NotFoundException::class)
-    fun handlerNotFoudExeption(ex: NotFoundException, response: WebRequest):ResponseEntity<ErroResponse> {
-      val erro = ErroResponse(
+    fun handleNotFoundException(ex: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
             HttpStatus.NOT_FOUND.value(),
             ex.message,
             ex.errorCode,
             null
         )
 
-       return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
     }
 
     @ExceptionHandler(BadRequestException::class)
-    fun handlerBadRequestExeption(ex: BadRequestException, response: WebRequest):ResponseEntity<ErroResponse> {
-        val erro = ErroResponse(
+    fun handleBadRequestException(ex: BadRequestException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
             HttpStatus.BAD_REQUEST.value(),
             ex.message,
-            ex.erroCode,
+            ex.errorCode,
             null
         )
 
@@ -39,23 +39,23 @@ class ControllerAdice {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handlerMethodArgumentNotValidException(ex: MethodArgumentNotValidException, response: WebRequest):ResponseEntity<ErroResponse> {
-        val erro = ErroResponse(
+    fun handleMethodArgumentNotValidException(ex: MethodArgumentNotValidException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
             HttpStatus.UNPROCESSABLE_ENTITY.value(),
-            Errors.ML_0001.message,
-            Errors.ML_0001.code,
-            ex.bindingResult.fieldErrors.map{ FieldErrorResponse( it.defaultMessage ?: "invalide", it.field) }
+            Errors.ML001.message,
+            Errors.ML001.code,
+            ex.bindingResult.fieldErrors.map { FieldErrorResponse(it.defaultMessage ?: "invalid", it.field) }
         )
 
         return ResponseEntity(erro, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 
     @ExceptionHandler(AccessDeniedException::class)
-    fun handlerAccessDeniedException(ex: AccessDeniedException, response: WebRequest):ResponseEntity<ErroResponse> {
-        val erro = ErroResponse(
+    fun handleAccessDeniedException(ex: AccessDeniedException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
             HttpStatus.FORBIDDEN.value(),
-            Errors.ML_0000.message,
-            Errors.ML_0000.code,
+            Errors.ML000.message,
+            Errors.ML000.code,
             null
         )
 

@@ -4,8 +4,9 @@ import com.mercadolivro.enums.CustomerStatus
 import com.mercadolivro.enums.Role
 import javax.persistence.*
 
-@Entity(name="customer")
-data class CustomerModel (
+@Entity(name = "customer")
+data class CustomerModel(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
@@ -26,6 +27,6 @@ data class CustomerModel (
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Role::class, fetch = FetchType.EAGER)
-    @CollectionTable(name="customer_roles", joinColumns = [JoinColumn(name ="customer_id")])
+    @CollectionTable(name = "customer_roles", joinColumns = [JoinColumn(name = "customer_id")])
     var roles: Set<Role> = setOf()
- )
+)

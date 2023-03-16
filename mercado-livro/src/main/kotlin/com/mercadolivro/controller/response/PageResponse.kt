@@ -5,5 +5,4 @@ class PageResponse<T>(
     var currentPage: Int,
     var totalItems: Long,
     var totalPages: Int,
-
 )

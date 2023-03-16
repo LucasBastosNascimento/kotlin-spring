@@ -29,7 +29,7 @@ class SecurityConfig(
     private val customerRepository: CustomerRepository,
     private val userDetails: UserDetailsCustomService,
     private val jwtUtil: JwtUtil,
-    private val customerEntryPoint: CustomAuthenticationEntryPoint
+    private val customEntryPoint: CustomAuthenticationEntryPoint
 ) : WebSecurityConfigurerAdapter() {
 
     private val PUBLIC_MATCHERS = arrayOf<String>()
@@ -38,11 +38,12 @@ class SecurityConfig(
         "/customers"
     )
 
-    private val ADMIN_MATCHERS = arrayOf(
-        "/admin/**"
-    )
     private val PUBLIC_GET_MATCHERS = arrayOf(
         "/books"
+    )
+
+    private val ADMIN_MATCHERS = arrayOf(
+        "/admin/**"
     )
 
     override fun configure(auth: AuthenticationManagerBuilder) {
@@ -60,21 +61,12 @@ class SecurityConfig(
         http.addFilter(AuthenticationFilter(authenticationManager(), customerRepository, jwtUtil))
         http.addFilter(AuthorizationFilter(authenticationManager(), userDetails, jwtUtil))
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        http.exceptionHandling().authenticationEntryPoint(customerEntryPoint)
+        http.exceptionHandling().authenticationEntryPoint(customEntryPoint)
     }
 
     override fun configure(web: WebSecurity) {
-        web.ignoring().antMatchers(
-            "/**.html",
-            "/v2/api-docs",
-            "/v3/api-docs",
-            "/configuration/ui",
-            "/swagger-resources/**",
-            "/configuration/security",
-            "/swagger-ui/**",
-            "/webjars/**",
-            "/csrf/**",
-            "/swagger-ui/index.html")
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**",
+            "/swagger-ui.html", "/webjars/**")
     }
 
     @Bean
@@ -82,7 +74,7 @@ class SecurityConfig(
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
         config.allowCredentials = true
-        config.addAllowedOriginPattern("*")
+        config.addAllowedOrigin("*")
         config.addAllowedHeader("*")
         config.addAllowedMethod("*")
         source.registerCorsConfiguration("/**", config)
