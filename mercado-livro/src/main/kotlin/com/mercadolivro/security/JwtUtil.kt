@@ -1,6 +1,6 @@
 package com.mercadolivro.security
 
-import com.mercadolivro.exception.AuthenticationException
+import com.mercadolivro.execption.AuthenticationException
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm

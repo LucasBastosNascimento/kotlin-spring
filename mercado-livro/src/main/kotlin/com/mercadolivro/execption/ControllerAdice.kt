@@ -1,4 +1,4 @@
-package com.mercadolivro.exception
+package com.mercadolivro.execption
 
 import com.mercadolivro.controller.response.ErroResponse
 import com.mercadolivro.controller.response.FieldErrorResponse

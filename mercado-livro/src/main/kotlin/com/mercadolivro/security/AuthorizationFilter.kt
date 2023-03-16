@@ -1,6 +1,6 @@
 package com.mercadolivro.security
 
-import com.mercadolivro.exception.AuthenticationException
+import com.mercadolivro.execption.AuthenticationException
 import com.mercadolivro.service.UserDetailsCustomService
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
