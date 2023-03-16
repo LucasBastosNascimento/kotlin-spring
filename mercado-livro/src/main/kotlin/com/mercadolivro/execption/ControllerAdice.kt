@@ -19,7 +19,7 @@ class ControllerAdice {
       val erro = ErroResponse(
             HttpStatus.NOT_FOUND.value(),
             ex.message,
-            ex.errorCode,
+            ex.erroCode,
             null
         )
 

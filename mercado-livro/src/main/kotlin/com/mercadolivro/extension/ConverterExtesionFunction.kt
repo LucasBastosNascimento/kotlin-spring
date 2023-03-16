@@ -30,7 +30,9 @@ fun PutCustomerRequest.toCustomerModel(previousValue: CustomerModel): CustomerMo
         status = previousValue.status,
         password = previousValue.password
     )
+
 }
+
 
 fun PostBookRequest.toBookModel(customer: CustomerModel): BookModel {
     return BookModel(
@@ -40,15 +42,14 @@ fun PostBookRequest.toBookModel(customer: CustomerModel): BookModel {
         customer = customer
     )
 }
-
 fun PutBookRequest.toBookModel(previousValue: BookModel): BookModel {
-    return BookModel(
-        id = previousValue.id,
-        name = this.name ?: previousValue.name,
-        price = this.price ?: previousValue.price,
-        status = previousValue.status,
-        customer = previousValue.customer
-    )
+        return BookModel(
+            id = previousValue.id,
+            name = this.name ?: previousValue.name,
+            price = this.price ?: previousValue.price,
+            status = previousValue.status,
+            customer = previousValue.customer
+        )
 }
 
 fun CustomerModel.toResponse(): CustomerResponse {
@@ -57,6 +58,7 @@ fun CustomerModel.toResponse(): CustomerResponse {
         name = this.name,
         email = this.email,
         status = this.status
+
     )
 }
 
@@ -68,12 +70,13 @@ fun BookModel.toResponse(): BookResponse {
         customer = this.customer,
         status = this.status
     )
-}
 
+}
 fun <T> Page<T>.toPageResponse(): PageResponse<T> {
     return PageResponse(
         this.content,
         this.number,
         this.totalElements,
-        this.totalPages)
+        this.totalPages
+    )
 }

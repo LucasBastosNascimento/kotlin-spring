@@ -20,23 +20,21 @@ class BookService(
     }
 
     fun findAll(pageable: Pageable): Page<BookModel> {
-        return bookRepository.findAll(pageable)
+      return  bookRepository.findAll(pageable)
     }
 
     fun findActives(pageable: Pageable): Page<BookModel> {
-        return bookRepository.findByStatus(BookStatus.ATIVO, pageable)
+        return bookRepository.findByStatus(BookStatus.ATIVO,pageable)
     }
 
     fun findById(id: Int): BookModel {
-        return bookRepository.findById(id).orElseThrow{ NotFoundException(Errors.ML101.message.format(id), Errors.ML101.code) }
+        return bookRepository.findById(id).orElseThrow{ NotFoundException(Errors.ML_B0001.message.format(id),Errors.ML_B0001.code)}
     }
 
     fun delete(id: Int) {
         val book = findById(id)
-
-        book.status = BookStatus.CANCELADO
-
-        update(book)
+        book.status = BookStatus.DELETADO
+       update(book)
     }
 
     fun update(book: BookModel) {
@@ -44,23 +42,21 @@ class BookService(
     }
 
     fun deleteByCustomer(customer: CustomerModel) {
-        val books = bookRepository.findByCustomer(customer)
-        for(book in books) {
+       val books = bookRepository.findByCustomer(customer)
+        for(book in books){
             book.status = BookStatus.DELETADO
         }
         bookRepository.saveAll(books)
     }
 
-    fun findAllByIds(bookIds: Set<Int>): List<BookModel> {
-        return bookRepository.findAllById(bookIds).toList()
+    fun findByIds(booksId: Set<Int>): List<BookModel>{
+      return  bookRepository.findAllById(booksId).toList()
     }
 
     fun purchase(books: MutableList<BookModel>) {
-        books.map {
+        books.map{
             it.status = BookStatus.VENDIDO
         }
         bookRepository.saveAll(books)
     }
-
-
 }

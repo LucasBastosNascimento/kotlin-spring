@@ -4,9 +4,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
   jackson:
-    default-property-inclusion: non_ null
+    default-property-inclusion: non_null
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+
 
 jwt:
-  secret: 2c57cf3a-c804-4dc5-8cd4-93b8d8581948
+  secret: 83b91f1d-9c32-4bd6-9b5e-f643c2c8f3a5
   expiration: 999999

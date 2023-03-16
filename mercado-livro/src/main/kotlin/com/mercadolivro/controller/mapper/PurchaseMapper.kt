@@ -8,19 +8,18 @@ import org.springframework.stereotype.Component
 
 @Component
 class PurchaseMapper(
-    private val bookService: BookService,
-    private val customerService: CustomerService
+    private  val  bookService: BookService,
+    private val  customerService: CustomerService
 ) {
 
-    fun toModel(request: PostPurchaseRequest): PurchaseModel {
-        val customer = customerService.findById(request.customerId)
-        val books = bookService.findAllByIds(request.bookIds)
+    fun toModel(resquest: PostPurchaseRequest): PurchaseModel{
+        val customer= customerService.findById(resquest.customerId)
+        val book = bookService.findByIds(resquest.booksId)
 
         return PurchaseModel(
             customer = customer,
-            books = books.toMutableList(),
-            price = books.sumOf { it.price }
+            books = book.toMutableList(),
+            price = book.sumOf { it.price }
         )
     }
-
 }
