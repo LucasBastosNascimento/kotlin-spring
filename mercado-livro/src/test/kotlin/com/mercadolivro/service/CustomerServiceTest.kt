@@ -176,6 +176,30 @@ class CustomerServiceTest {
         verify(exactly = 0) { customerRepository.save(any()) }
     }
 
+    @Test
+    fun `should return true when email available`() {
+        val email = "${Random().nextInt().toString()}@email.com"
+
+        every { customerRepository.existsByEmail(email) } returns false
+
+        val emailAvailable = customerService.emailAvailable(email)
+
+        assertTrue(emailAvailable)
+        verify(exactly = 1) { customerRepository.existsByEmail(email) }
+
+    }
+    @Test
+    fun `should return false when email unavailable`() {
+        val email = "${Random().nextInt()}@email.com"
+
+        every { customerRepository.existsByEmail(email) } returns true
+
+        val emailAvailable = customerService.emailAvailable(email)
+
+        assertFalse(emailAvailable)
+        verify(exactly = 1) { customerRepository.existsByEmail(email) }
+
+    }
     fun buildCustomer(
         id: Int? = null,
         name: String = "customer name",
