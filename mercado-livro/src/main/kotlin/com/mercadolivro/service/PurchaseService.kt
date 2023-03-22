@@ -12,7 +12,7 @@ class PurchaseService(
     private val applicationEventPublisher:ApplicationEventPublisher
 ) {
 
-    fun creant(purchaseModel: PurchaseModel){
+    fun create(purchaseModel: PurchaseModel){
         purchaseRepository.save(purchaseModel)
 
         println("Disparando evento de compra")
