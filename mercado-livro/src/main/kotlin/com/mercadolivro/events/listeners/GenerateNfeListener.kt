@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-class GenerationNfeLister(
+class GenerateNfeListener(
     private val purchaseService: PurchaseService
 ) {
     @Async
