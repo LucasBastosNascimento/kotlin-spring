@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: test
   datasource:
     url: jdbc:mysql://localhost:3306/mercadolivrotest?createDatabaseIfNotExist=true
     username: root
@@ -11,10 +9,6 @@ spring:
 
   jackson:
     default-property-inclusion: non_null
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant-path-matcher
 
 
 jwt:
