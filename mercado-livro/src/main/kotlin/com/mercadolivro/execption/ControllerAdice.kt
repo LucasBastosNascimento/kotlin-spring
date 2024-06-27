@@ -42,8 +42,8 @@ class ControllerAdice {
     fun handlerMethodArgumentNotValidException(ex: MethodArgumentNotValidException, response: WebRequest):ResponseEntity<ErroResponse> {
         val erro = ErroResponse(
             HttpStatus.UNPROCESSABLE_ENTITY.value(),
-            Errors.ML_0001.message,
-            Errors.ML_0001.code,
+            Errors.ML001.message,
+            Errors.ML001.code,
             ex.bindingResult.fieldErrors.map{ FieldErrorResponse( it.defaultMessage ?: "invalide", it.field) }
         )
 
@@ -54,8 +54,8 @@ class ControllerAdice {
     fun handlerAccessDeniedException(ex: AccessDeniedException, response: WebRequest):ResponseEntity<ErroResponse> {
         val erro = ErroResponse(
             HttpStatus.FORBIDDEN.value(),
-            Errors.ML_0000.message,
-            Errors.ML_0000.code,
+            Errors.ML000.message,
+            Errors.ML000.code,
             null
         )
 

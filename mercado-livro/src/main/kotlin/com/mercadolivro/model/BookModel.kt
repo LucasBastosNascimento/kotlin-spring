@@ -29,7 +29,7 @@ data class BookModel (
     var status: BookStatus? = null
     set(value){
         if(field == BookStatus.CANCELADO || field == BookStatus.DELETADO)
-            throw BadRequestException(Errors.ML_B0002.code,Errors.ML_B0002.message.format(field))
+            throw BadRequestException(Errors.ML102.code,Errors.ML102.message.format(field))
 
         field = value
     }
