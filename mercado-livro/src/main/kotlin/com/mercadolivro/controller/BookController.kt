@@ -42,6 +42,7 @@ class BookController(
 
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Int): BookResponse{
+        //teste
         return bookService.findById(id).toResponse()
     }
 
